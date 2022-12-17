@@ -1,0 +1,74 @@
+{% extend_me %}
+
+{% block topScripts %}
+    {{ super() }}
+    {% jsresource request,'formshare','codemirror-r' %}
+{% endblock %}
+
+{% block nav_links_extra %}
+    {{ super() }}
+    <li><a class="nav-link {% if active_tab == "RAnalytics" %}active{% endif %}" data-toggle="tab" href="#RAnalytics"><i><img src="{{request.url_for_static('Superset_logo.svg','RAnalytics')}}" style="max-height: 16px; max-width: 16px"></i> {{ _('R') }}</a></li>
+{% endblock nav_links_extra %}
+
+{% block tab_content_extra %}
+    <div id="RAnalytics" class="tab-pane {% if active_tab == "RAnalytics" %}active{% endif %}">
+        <div class="panel-body">
+            <div class="text-center">
+                <h1><i><img src="{{request.url_for_static('R_logo.svg','RAnalytics')}}" style="width: 256px; height: 100%;"></i></h1>
+                {{ _('Your need an API Key and Secret. You can generate them in your') }} <a href="{{ request.route_url('profile_edit', userid=activeUser.login,_query={'next': request.url}) }}">{{ _('profile') }}</a><br/>
+                {{ _('Example of usage in R') }}
+                <textarea readonly id="r_code">
+if(!require(FormShare)){
+  install.packages("FormShare", repos = "http://cran.us.r-project.org")
+}
+library(FormShare)
+# {{ _('Create a new connection to FormShare') }}
+my_connection = FormShare$new(
+  server_url = "{{ request.application_url }}",
+  user_id = "{{ activeUser.login }}",
+  api_key = "your_api_key",
+  api_secret = "your_api_secret"
+)
+# {{ _('Login') }}
+my_connection$login()
+
+# {{ _('Get the repositories that you have access') }}
+my_repositories = my_connection$get_repositories()
+
+# {{ _('Execute a query') }}
+data = my_connection$execute("repository_id", "SELECT * FROM {{ databases[0].form_schema }}")
+
+</textarea>
+                <small>{{ _('R and the R logo are trademarks of the The R Foundation') }}</small>
+            </div>
+        </div>
+    </div>
+{% endblock tab_content_extra %}
+
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $(document).ready(function() {
+            let example_r_loaded = false;
+
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                if (e.target.getAttribute("href") === "#RAnalytics")
+                    load_r_example();
+            })
+
+            function load_r_example() {
+                if (example_r_loaded === false) {
+                    example_r_loaded = true;
+                    let r_editor = CodeMirror.fromTextArea(document.getElementById("r_code"), {
+                        lineNumbers: true,
+                        matchBrackets: true,
+                        styleActiveLine: true,
+                        readOnly: true,
+                        mode: 'r',
+                    });
+                }
+            }
+        });
+    </script>
+{% endblock scripts %}

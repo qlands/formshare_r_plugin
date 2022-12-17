@@ -1,0 +1,45 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: R-Plugin\n"
+"Language: fr\n"
+
+#: R_analytics/templates/analytics/index.jinja2:10
+msgid "R"
+msgstr "R"
+
+#: R_analytics/templates/analytics/index.jinja2:18
+msgid "Your need an API Key and Secret. You can generate them in your"
+msgstr "Vous avez besoin d'une clé API et d'un mot de passe. Vous pouvez les générer dans votre"
+
+#: R_analytics/templates/analytics/index.jinja2:18
+msgid "profile"
+msgstr "profil"
+
+#: R_analytics/templates/analytics/index.jinja2:19
+msgid "Example of usage in R"
+msgstr "Exemple d'utilisation dans R"
+
+#: R_analytics/templates/analytics/index.jinja2:25
+msgid "Create a new connection to FormShare"
+msgstr "Créer une nouvelle connexion avec FormShare"
+
+#: R_analytics/templates/analytics/index.jinja2:32
+msgid "Login"
+msgstr "Connectez-vous"
+
+#: R_analytics/templates/analytics/index.jinja2:35
+msgid "Get the repositories that you have access"
+msgstr "Obtenez les dépôts auxquels vous avez accès"
+
+#: R_analytics/templates/analytics/index.jinja2:38
+msgid "Execute a query"
+msgstr "Exécuter une requête"
+
+#: R_analytics/templates/analytics/index.jinja2:42
+msgid "R and the R logo are trademarks of the The R Foundation"
+msgstr "R et le logo R sont des marques déposées de The R Foundation."
+
